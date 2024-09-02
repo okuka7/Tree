@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpSession;
 import kr.or.iei.user.model.dto.UserDto;
 import kr.or.iei.user.model.service.UserService;
+
+@Controller
 @RequestMapping(value="/user")
 public class UserController {
 	@Autowired
@@ -20,11 +22,8 @@ public class UserController {
 	}
 	@PostMapping(value = "/login")
 	public String login(UserDto u, HttpSession session) {
-		System.out.println(u);
-//		UserDto user = userService.selectOneUser(u);	
-//		if(user != null) {
-//			session.setAttribute("user", user);
-//		}
-		return "redirect:/";
+	    // 로그인 로직 수행
+	    System.out.println(u);
+	    return "redirect:/";
 	}
 }

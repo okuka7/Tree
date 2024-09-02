@@ -3,8 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/dist/core/main.min.css' rel='stylesheet' />
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/dist/daygrid/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/dist/core/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/dist/daygrid/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/dist/interaction/main.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 </head>
 <body>
 	
+
+
+
+    <script>
+        $(document).ready(function() {
+  var calendarEl = $('#calendar')[0];
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    // 옵션 설정
+  });
+  calendar.render();
+});
+    </script>
 </body>
 </html>

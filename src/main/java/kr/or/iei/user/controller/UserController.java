@@ -22,8 +22,13 @@ public class UserController {
 	}
 	@PostMapping(value = "/login")
 	public String login(UserDto u, HttpSession session) {
-	    // 로그인 로직 수행
-	    System.out.println(u);
-	    return "redirect:/";
+	    UserDto user = userService.selectOneUser(u);
+
+	    if (user != null) { // 로그인 성공
+	        session.setAttribute("loginUser", user); // 세션에 유저 정보 저장
+	        return "redirect:/"; // 홈으로 리다이렉트
+	    } else { // 로그인 실패
+	        return "redirect:/user/loginFrm"; // 로그인 폼으로 리다이렉트
+	    }
 	}
 }

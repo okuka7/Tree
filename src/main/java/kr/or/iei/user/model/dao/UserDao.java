@@ -7,6 +7,8 @@ import kr.or.iei.user.model.dto.UserDto;
 @Mapper
 public interface UserDao {
 
-	UserDto selectOneUser(UserDto u);
+	int insertMember(UserDto u);
+
+	UserDto selectOneUser(String userId);
 
 }

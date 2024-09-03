@@ -3,53 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/dist/fullcalendar.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+<script>
+  $(document).ready(function() {
+  var calendarEl = $('#calendar')[0];
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth'
+  });
+  calendar.render();
+});
+</script>
+
 </head>
 <body>
-	
-
-
-
-  <div id='calendar'></div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new fullcalendar.Calendar(calendarEl, {
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        initialDate: '2024-03-12', // 초기 날짜
-        navLinks: true, // 날짜를 클릭했을 때, 해당 날짜의 일정을 표시합니다.
-        editable: true, // 일정을 편집할 수 있습니다.
-        dayMaxEvents: true, // 일정을 표시할 때, 최대 일정을 표시합니다.
-        locale: 'ko', // 한국어 설정
-        events: [ // 일정을 추가합니다.
-          {
-            title: 'All Day Event',
-            start: '2024-03-01',
-            end: '2024-03-02',
-            backgroundColor: '#f56954', // 배경색
-            borderColor: '#f56954', // 테두리색
-            textColor: '#ffffff' // 텍스트색
-          },
-          {
-            title: 'Long Event',
-            start: '2024-03-07',
-            end: '2024-03-10',
-            backgroundColor: '#f39c12', // 배경색
-            borderColor: '#f39c12', // 테두리색
-            textColor: '#ffffff' // 텍스트색
-          }
-        ]
-      });
-      calendar.render();
-    });
-  </script>
   
+  
+  <div id='calendar'></div>
+  
+
   
   
     

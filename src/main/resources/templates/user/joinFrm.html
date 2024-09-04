@@ -34,13 +34,27 @@
 			<div>
 				<label for="userEmail">이메일</label>
 				<input type="text" name="userEmail" id="userEmail" required>
-			</div>
+<!-- 			프론트 보고 결정..!
+				<span>@</span>
+				<select class="email">
+					<option value="naver.com">naver</option>
+					<option value="gmail.com">gmail</option>
+					<option value="hanmail.com">hanmail</option>
+				</select>
+			</div> -->
 			<div>
 				<button type="submit" onclick="return checkValue();">회원가입</button>
 			</div>
 		</fieldset>
 	</form>
 	<script>
+	
+		// "사용 가능"이 뜨고 아이디 값을 바꿀 때 "valid" 방지하기 위함 => 값 바꾸면 다시 중복체크 해야함
+	    $("#userId").on("input", function() {
+	        $("#idCheckMsg").text(""); // 메시지 초기화
+	        $("#idCheckMsg").removeClass("valid").removeClass("invalid"); // 클래스 초기화
+	    });
+		
 		$("#idCheckBtn").on("click",function(){
 			const userId = $("#userId").val();
 			

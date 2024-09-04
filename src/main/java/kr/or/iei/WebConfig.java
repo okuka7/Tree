@@ -28,9 +28,10 @@ public class WebConfig implements WebMvcConfigurer{
 			.addResourceLocations("file:///"+root+"/board/");
 	}
 
+	// 암호화 관련
 	@Bean
 	public BCryptPasswordEncoder bCrype() {
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(); // 서버 시작시 만들어지게..
 	}
 	
 }

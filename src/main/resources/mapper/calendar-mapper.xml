@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.or.iei.calendar.model.dao.CalendarDao">
 
+	<insert id="insertCalender">
+		insert into calender values(calendar_seq.nextval,#{userNo},#{start_day},#{end_day},#{calendar_content},0)
+	</insert>
+
 </mapper>

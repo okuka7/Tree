@@ -16,4 +16,7 @@ public class CalendarService {
 		int result = calendarDao.insertCalender(calendar);
 		return result;
 	}
+    public Calendar getInfo() {
+        Calendar calendar = calendarDao.getInfo();
+    }
 }

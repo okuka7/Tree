@@ -13,4 +13,10 @@
 	<insert id="insertChild">
 		insert into todo values(todo_seq.nextval, #{todoContent}, 0, #{userNo}, to_char(sysdate, 'yyyy-mm-dd'), #{todoRefNo})
 	</insert>
+	<delete id="deleteTodo">
+		delete from todo where todo_no=#{todoNo}
+	</delete>
+	<select id="selectUnDoneTodo" resultType="todo">
+	select todo_no, todo_content, todo_done from todo where user_no = #{user_no} and todo_date = to_char(sysdate, 'yyyy-mm-dd') and todo_ref_no is null and todo_done = 0
+	</select>
 </mapper>

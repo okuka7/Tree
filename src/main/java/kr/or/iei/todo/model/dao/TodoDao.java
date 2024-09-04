@@ -18,4 +18,8 @@ public interface TodoDao {
 
 	int insertChild(TodoDTO todo);
 
+	int deleteTodo(int todoNo);
+
+	List selectUnDoneTodo(UserDto loginUser);
+
 }

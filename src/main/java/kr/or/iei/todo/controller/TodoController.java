@@ -34,6 +34,15 @@ public class TodoController {
 		return "todo/todoList";
 	}
 	
+	@Operation(summary="진행중인 할일 목록 조회", description="당일 할일 목록 중 체크가 되지 않은 목록 조회")
+	@GetMapping(value="/unDoneTodoList")
+	public String selectUndoneTodo(@SessionAttribute UserDto loginUser, Model model) {
+		Map todoList = todoService.unDoneTodo(loginUser);
+		model.addAttribute("parentList", todoList.get("parentList"));
+		model.addAttribute("childList", todoList.get("childList"));
+		return "todo/todoList";
+	}
+	
 	@Operation(summary="할일 등록", description="당일 할일 목록 등록")
 	@PostMapping
 	public String insertTodo(TodoDTO todo, Model model) {
@@ -41,5 +50,24 @@ public class TodoController {
 		model.addAttribute("result", result);
 		return "todo/todoList";
 	}
+
+	@Operation(summary="할일 삭제", description="할일 번호를 받아서 완료 할일 삭제")
+	@GetMapping(value="/deleteTodo")
+	public String deleteTodo(int todoNo) {
+		int result = todoService.deleteTodo(todoNo);
+		return "todo/todoList";
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

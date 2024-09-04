@@ -6,4 +6,8 @@
 		insert into calender values(calendar_seq.nextval,#{userNo},#{start_day},#{end_day},#{calendar_content},0)
 	</insert>
 
+	<select id="selectCalendar" resultType="calendar">
+		select * from calendar where user_no = 4
+	</select>
+
 </mapper>

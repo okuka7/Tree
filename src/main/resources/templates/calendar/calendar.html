@@ -22,13 +22,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script>
-  $(document).ready(function() {
-  var calendarEl = $('#calendar')[0];
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth'
-  });
-  calendar.render();
-});
+  
 </script>
 
 </head>
@@ -42,6 +36,33 @@
   
   <script>
 
+$(document).ready(function() {
+  var calendarEl = $('#calendar')[0];
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    evnets: [],
+    
+    // dataClick : function(info){
+    //   calendar.addEvent({title : "제목"})
+    // }
+    
+
+
+
+
+
+    
+  });
+  calendar.render();
+});
+
+
+
+
+
+
+
+
     $(document).ready(function() {
   $.ajax({
     type: "get",
@@ -52,16 +73,25 @@
       let events = [];
       $.each(data, function(index, event) {
         events.push({
-          id: event.EVENT_ID,
-          title: event.EVENT_NAME,
-          start: event.START_DATE,
-          end: event.END_DATE
+          // id: event.EVENT_ID,
+          // title: event.EVENT_NAME,
+          // start: event.START_DATE,
+          // end: event.END_DATE
+          id: 1,
+          title: "제목",
+          start: "2024-09-06 17:00:00",
+          end: "2024-09-08 17:00:00"
         });
       });
       $('#calendar').fullCalendar({
         events: events
       });
+    },
+    error : function(){
+      console.log("에러");
     }
+
+    
   });
 });
     

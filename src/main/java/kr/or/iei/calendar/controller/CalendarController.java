@@ -1,6 +1,7 @@
 package kr.or.iei.calendar.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,15 +26,19 @@ public class CalendarController {
     
     @GetMapping(value = "/insert")
     public String insertCalender(Calendar calendar) {
-    	int result = calendarService.insertCalender(calendar);
-    	return "calender/writeFrm";
+        int result = calendarService.insertCalender(calendar);
+        return "calender/writeFrm";
     }
 
     @ResponseBody
     @GetMapping(value = "/info")
-    public Calendar getInfo(@SessionAttribute UserDto user){
-        Calendar calendar = calendarService.getInfo();
-        return null;
+    public Calendar getInfo(){
+        System.out.println("ssssss");
+        UserDto user = new UserDto();
+        user.setUserNo(4);
+        Calendar calendar = calendarService.getInfo(user);
+        System.out.println(calendar);
+        return calendar;
     }
 
 }

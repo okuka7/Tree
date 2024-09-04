@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @Alias(value="calendar")
 public class Calendar {
 
-    private int calendar_no;
-    private int user_no;
-    private String start_day;
-    private String end_day;
-    private String caledarn_content;
+    private int calendarNo;
+    private int userNo;
+    private String startDay;
+    private String endDay;
+    private String calendarContent;
     private int important;
 
 }

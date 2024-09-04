@@ -3,6 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+  .calednar-wrap{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #calendar{
+    width: 80%;
+    height: 80%;
+  }
+
+</style>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script>
@@ -18,12 +34,43 @@
 </head>
 <body>
   
-  
-  <div id='calendar'></div>
+  <div class="calednar-wrap">
+    <div id='calendar'></div>
+  </div>
   
 
   
-  
+  <script>
+
+    $(document).ready(function() {
+  $.ajax({
+    type: "get",
+    url: "/calendar/info",
+    dataType: "json",
+    success: function(data) {
+      console.log(data);
+      let events = [];
+      $.each(data, function(index, event) {
+        events.push({
+          id: event.EVENT_ID,
+          title: event.EVENT_NAME,
+          start: event.START_DATE,
+          end: event.END_DATE
+        });
+      });
+      $('#calendar').fullCalendar({
+        events: events
+      });
+    }
+  });
+});
+    
+    
+    
+    
+    
+    
+  </script>
     
 </body>
 </html>

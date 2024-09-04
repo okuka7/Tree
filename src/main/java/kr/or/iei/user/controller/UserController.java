@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpSession;
 import kr.or.iei.user.model.dto.UserDto;
@@ -30,17 +31,34 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	// 아이디 체크
+	@ResponseBody
+	@PostMapping(value="/checkId")
+	public int checkId(String userId) {
+		UserDto user = userService.selectCheckId(userId);
+		if(user == null) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	
 	// 로그인
 	@PostMapping(value = "/login")
 	public String login(UserDto u, HttpSession session) {
 	    UserDto user = userService.selectOneUser(u);
-	    System.out.println(user);
 
 	    if (user != null) { // 로그인 성공
 	        session.setAttribute("user", user); // 세션에 유저 정보 저장
-	        return "redirect:/"; // 홈으로 리다이렉트
-	    } else { // 로그인 실패
-	        return "redirect:/"; // 로그인 폼으로 리다이렉트
 	    }
+	    return "redirect:/"; // 홈으로 리다이렉트
+	}
+	
+	// 로그아웃
+	@GetMapping(value="/logout")
+	public String logout(HttpSession session, Model model) {
+		session.invalidate();
+		return "redirect:/";
 	}
 }

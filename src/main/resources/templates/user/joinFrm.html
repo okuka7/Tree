@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script src="/js/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <body>
 	<h1>회원가입</h1>
 	<form action="/user/join" method="post">
@@ -12,59 +12,96 @@
 			<legend>회원 정보 입력</legend>
 			<div>
 				<label for="userId">아이디</label>
-				<input type="text" name="userId" id="userId">
-				<!-- <button type="button" id="idCheckBtn">중복체크</button> -->
+				<input type="text" name="userId" id="userId" required>
+				<button id="idCheckBtn" type="button">중복체크</button>
 				<span id="idCheckMsg"></span>
+				<span id="idValidMsg"></span>
 			</div>
 			<div>
 				<label for="userPw">비밀번호</label>
-				<input type="password" name="userPw" id="userPw">
+				<input type="password" name="userPw" id="userPw" required>
+				<span id="checkPw"></span>
 			</div>
-			<!-- 
 			<div>
 				<label for="userPwRe">비밀번호 확인</label>
-				<input type="password" name="userPwRe" id="userPwRe">
+				<input type="password" name="userPwRe" id="userPwRe" required>
+				<span class="input-msg pw-check-msg"></span>
 			</div>
-			<p class="input-msg pw-check-msg"></p>
-			 -->
 			<div>
 				<label for="userName">이름</label>
-				<input type="text" name="userName" id="userName">
+				<input type="text" name="userName" id="userName" required>
 			</div>
 			<div>
 				<label for="userEmail">이메일</label>
-				<input type="text" name="userEmail" id="userEmail">
+				<input type="text" name="userEmail" id="userEmail" required>
 			</div>
 			<div>
-				<input type="submit" value="회원가입">
+				<button type="submit" onclick="return checkValue();">회원가입</button>
 			</div>
 		</fieldset>
 	</form>
 	<script>
-	/* 비밀번호 확인도 만들기
-	$("#idCheckBtn").on("click", function(){
-		const userId = $("#userId").val();
-		$.ajax({
-			//url : "/user/checkId",
-			url : "/user/checkId2",
-			type : "get",
-			data : {userId : userId},
-			success : function(data){
-				if(data == 0){
-					$("#idCheckMsg").text("사용 가능한 아이디 입니다.");
-					$("#idCheckMsg").css("color","green");			
-				} else {
-					$("#idCheckMsg").text("사용 불가능한 아이디 입니다.");
-					$("#idCheckMsg").css("color","red");
+		$("#idCheckBtn").on("click",function(){
+			const userId = $("#userId").val();
+			
+			const regex = /^[a-zA-Z0-9!@#$%^&*()]{3,7}$/;
+			if(!regex.test(userId)){
+				$("#idCheckMsg").text("영어 대소문자/숫자/특수문자로 3~7자").css("color", "red");
+				return;
+			}
+			$.ajax({
+				url : "/user/checkId",
+				data : {userId,userId},
+				type : "post",
+				success : function(data){
+					if(data == 1){
+						$("#idCheckMsg").text("사용가능");
+						$("#idCheckMsg").addClass("valid");
+						$("#idCheckMsg").css("color","green");
+					}else{
+						$("#idCheckMsg").text("사용불가능");
+						$("#idCheckMsg").addClass("invalid");
+						$("#idCheckMsg").css("color","red");
+					}
+				},
+				error : function(){
+					console.log("error");
 				}
-			},
-			error : function() {
-				console.log("에러");
+			});
+		});
+		
+		$("#userPw").on("keyup",function(){
+			$("#checkPw").removeClass("valid").removeClass("invalid").text("");
+			const userPw=$("#userPw").val(); // 비밀번호
+			const regex = /^[a-zA-Z0-9!@#$%^&*()]{3,12}$/; // 3~12글자 대소문자 숫자 특수문자
+			if(!regex.test(userPw)){
+				$("#checkPw").text("영어 대소문자/숫자/특수문자로 3~12자").css("color", "red");
+			}else{
+				$("#checkPw").addClass("valid");
+				$("#checkPw").text("사용 가능");
 			}
 		});
-	});
-	*/
-	/**/
+		
+		$("#userPwRe").on("keyup",function(){
+			$(".pw-check-msg").removeClass("valid").removeClass("invalid");
+			const pwValue = $("#userPw").val();
+			const pwReValue = $("#userPwRe").val();
+			if(pwValue === pwReValue){
+				$(".pw-check-msg").text("비밀번호가 일치합니다.").css("color", "green");
+				$(".pw-check-msg").addClass("valid");
+			}else{
+				$(".pw-check-msg").text("비밀번호가 일치하지 않습니다.").css("color", "red");
+				$(".pw-check-msg").addClass("invalid");
+			}
+		});
+		function checkValue(){
+			const valid = $(".valid");
+			if(valid.length != 3){
+				alert("다시");
+				return false;
+			}
+		}
+		
 	</script>
 </body>
 </html>

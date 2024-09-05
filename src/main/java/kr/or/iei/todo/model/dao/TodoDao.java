@@ -20,6 +20,8 @@ public interface TodoDao {
 
 	int deleteTodo(int todoNo);
 
-	List selectUnDoneTodo(UserDto loginUser);
+	List selectUndoneTodo(UserDto loginUser);
+
+	List<TodoDTO> selectAllUndoneTodo();
 
 }

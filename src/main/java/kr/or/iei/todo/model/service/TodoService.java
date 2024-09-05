@@ -41,10 +41,22 @@ public class TodoService {
 		return result;
 	}
 	public Map unDoneTodo(UserDto loginUser) {
-		List parentList = todoDao.selectUnDoneTodo(loginUser);
+		List parentList = todoDao.selectUndoneTodo(loginUser);
 		//childList는 좀더 고민해보겠음
 		Map<String, List>map = new HashMap<String, List>();
 		map.put("parentList", parentList);
 		return null;
+	}
+	@Transactional
+	public void delayTodo() {
+		List<TodoDTO> undoneList = todoDao.selectAllUndoneTodo();
+		int result = 0;
+		for(TodoDTO todo : undoneList) {
+			if(todo.getTodoRefNo()==0) {
+				result+=todoDao.insertParent(todo);
+			}else {
+				result += todoDao.insertChild(todo);
+			}
+		}
 	}
 }

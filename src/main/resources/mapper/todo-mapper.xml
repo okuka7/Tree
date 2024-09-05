@@ -19,6 +19,15 @@
 	<select id="selectUndoneTodo" resultType="todo">
 	select todo_no, todo_content, todo_done from todo where user_no = #{user_no} and todo_date = to_char(sysdate, 'yyyy-mm-dd') and todo_ref_no is null and todo_done = 0
 	</select>
+	
+	<select id="selectUndoneTodoChild" resultType="todo">
+		select todo_no, todo_content, todo_done from todo where user_no = #{user_no} and todo_date = to_char(sysdate, 'yyyy-mm-dd') and todo_done = 0
+		and todo_ref_no in
+		<foreach collection="list" item="todo" open="(" close=")" separator=",">
+		 #{todo.todoNo}
+		</foreach>
+	</select>
+	
 	<select id="selectAllUndoneTodo" resultType="todo">
 	select todo_content, user_no, todo_ref_no from todo where todo_done=0 and todo_date = to_char(sysdate-1, 'yyyy-mm-dd')
 	</select>

@@ -48,9 +48,10 @@ public class UserController {
 	@PostMapping(value = "/login")
 	public String login(UserDto u, HttpSession session) {
 	    UserDto user = userService.selectOneUser(u);
-
 	    if (user != null) { // 로그인 성공
 	        session.setAttribute("user", user); // 세션에 유저 정보 저장
+	    }else {
+	    	// 유저 조회가 안되면 "정보를 조회할 수 없습니다" 띄우기
 	    }
 	    return "redirect:/"; // 홈으로 리다이렉트
 	}

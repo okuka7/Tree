@@ -29,7 +29,6 @@ public class UserService {
 	public UserDto selectOneUser(UserDto u) {
 		// 아이디로 user 정보 먼저 조회
 		UserDto user = userDao.selectOneUser(u.getUserId());
-		System.out.println(user);
 
 		// 조회한 정보가 null값이 아니고, 평문 비밀번호와 암호화된 비밀번호가 일치하면 아래 코드 실행
 		if (user != null && encoder.matches(u.getUserPw(), user.getUserPw())) {

@@ -37,14 +37,27 @@
   <script>
 
 $(document).ready(function() {
-  var calendarEl = $('#calendar')[0];
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+  let calendarEl = $('#calendar')[0];
+  let calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
-    evnets: [],
+    selectable : true,
+    events:[],
+
+    dateClick: function(info){
+      console.log(info);
+
+      const date = prompt("날짜");
+      // console.log(date);
+
+      calendar.addEvent({
+        title : "제목",
+        start: info.dateStr,
+        end : date
+
+      });
+      
+    }
     
-    // dataClick : function(info){
-    //   calendar.addEvent({title : "제목"})
-    // }
     
 
 
@@ -63,37 +76,37 @@ $(document).ready(function() {
 
 
 
-    $(document).ready(function() {
-  $.ajax({
-    type: "get",
-    url: "/calendar/info",
-    dataType: "json",
-    success: function(data) {
-      console.log(data);
-      let events = [];
-      $.each(data, function(index, event) {
-        events.push({
-          // id: event.EVENT_ID,
-          // title: event.EVENT_NAME,
-          // start: event.START_DATE,
-          // end: event.END_DATE
-          id: 1,
-          title: "제목",
-          start: "2024-09-06 17:00:00",
-          end: "2024-09-08 17:00:00"
-        });
-      });
-      $('#calendar').fullCalendar({
-        events: events
-      });
-    },
-    error : function(){
-      console.log("에러");
-    }
+//     $(document).ready(function() {
+//   $.ajax({
+//     type: "get",
+//     url: "/calendar/info",
+//     dataType: "json",
+//     success: function(data) {
+//       console.log(data);
+//       let events = [];
+//       $.each(data, function(index, event) {
+//         events.push({
+//           // id: event.EVENT_ID,
+//           // title: event.EVENT_NAME,
+//           // start: event.START_DATE,
+//           // end: event.END_DATE
+//           id: 1,
+//           title: "제목",
+//           start: "2024-09-06 17:00:00",
+//           end: "2024-09-08 17:00:00"
+//         });
+//       });
+//       $('#calendar').fullCalendar({
+//         events: events
+//       });
+//     },
+//     error : function(){
+//       console.log("에러");
+//     }
 
     
-  });
-});
+//   });
+// });
     
     
     
